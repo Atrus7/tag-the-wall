@@ -14,7 +14,8 @@ var passed_id;
 var thaturl;
 
 var path = location.hostname;
-    if (window.location.pathname.length !== 1) path = path + window.location.pathname;
+    if (window.location.pathname.length > 1) path = path + window.location.pathname;
+    if (path.slice(-1) === "/") path = path.substring(0, str.length - 1);
     console.log(path);
 
     Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j", "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");

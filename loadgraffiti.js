@@ -11,6 +11,7 @@ $(function() {
 	var query = new Parse.Query(Graffiti);
 	var path = location.hostname;
 	if (window.location.pathname.length > 1) path = path + window.location.pathname;
+    if (path.slice(-1) === "/") path = path.substring(0, str.length - 1);
 
 	//query based on criteria
 	//query.equalTo("urlStr",document.URL);
