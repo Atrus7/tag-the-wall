@@ -32,6 +32,30 @@ var path = location.hostname;
             //alert('Failed with error code: ' + error.message);
         }
     });
+    function loadPrivate()
+    {
+        passed_id = $("#private_id").val();
+        var shared_id = passed_id;
+        if(passed_id=="")
+        {
+            alert("Can't lookup blank field");
+        }
+        else
+        {
+            alert(passed_id);
+
+        
+            Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
+            "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
+
+          var share_graffiti = Parse.Object.extend("Graffiti");
+          var query = new Parse.Query(share_graffiti);
+
+          // setting the query criteria
+          query.equalTo("id", shared_id);
+        }
+
+    }
 
     function fileUpload(data){
 
