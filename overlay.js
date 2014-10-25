@@ -1,9 +1,8 @@
 ﻿var css = jQuery('<link href="overlay.css" rel="stylesheet" type="text/css">');
-var jquery = jQuery('<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>');
 var overlay = jQuery('<div id="graffiti-overlay"> </div>');
+
 css.appendTo(document.body);
 jquery.appendTo(document.body);
-overlay.appendTo(document.body);
 var pic_x, pic_y;
 pic_x = 108;
 pic_y = 18;

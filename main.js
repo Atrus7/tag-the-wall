@@ -10,7 +10,7 @@ init();
 alert("Yo");
 
 function init() {
-    $("body").append("<canvas id="theWall"></canvas>");
+    $("body").append('<canvas id="theWall"></canvas>');
     if (window.top != window) {
         document.getElementById("header").style.display = "none";
     }

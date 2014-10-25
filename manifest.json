@@ -18,7 +18,7 @@
     {
       "matches": ["<all_urls>"],
       "js": ["easeljs.min.js","jquery-2.1.1.min.js", "paintbrushes.js", "main.js", "overlay.js"],
-      "css": ["style.css"]
+      "css": ["style.css", "overlay.css"]
     }
   ],
 
