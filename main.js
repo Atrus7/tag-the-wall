@@ -10,6 +10,7 @@ var BLUE = "#0000ff";
 var GREEN = "#00ff00";
 var editing = false;
 var name;
+var passed_id;
 
 var path = location.hostname;
     if (window.location.pathname.length > 0) path = path + window.location.pathname;
@@ -33,6 +34,53 @@ var path = location.hostname;
             //alert('Failed with error code: ' + error.message);
         }
     });
+    function loadPrivate()
+    {
+
+        
+        if(passed_id=="")
+        {
+            console.log("Can't lookup blank field");
+        }
+        else
+        {
+            console.log(passed_id);
+
+              Parse.$ = jQuery;
+
+  // Initialize Parse with your Parse application javascript keys
+             Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
+    "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
+
+            var Graffiti = Parse.Object.extend("Graffiti");
+            var query = new Parse.Query(Graffiti);
+
+          // setting the query criteria
+          query.get(passed_id, {
+          success: function(result) {
+            console.log("download is successfull");
+            // Do something with the returned Parse.Object values
+            var graffiti = result;
+            var title = graffiti.get('title');
+            var imagePath = chrome.extension.getURL(title);
+            var pngUrl = graffiti.get('png').url();
+            var left = graffiti.get('left');
+            var top = graffiti.get('top');
+            var votes = graffiti.get('upVotes') - graffiti.get('downVotes');
+            var one_picture = {x: left, y:top, name: title, vote: votes, data:pngUrl};
+            var pic=jQuery('<img class="graffiti" style = "left:'+ one_picture["x"] +
+            'px; top: ' + one_picture["y"] + 'px; z-index: 23881273489127348971234897128935709813475094235788;" src ="' + one_picture["data"] + '"> </img>');
+             pic.appendTo(document.body);
+              console.log(pngUrl);
+        
+          },
+          error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+          }
+        });
+        }
+
+    }
 
     function fileUpload(name, data){
 
