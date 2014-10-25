@@ -12,12 +12,12 @@ $(function() {
 
 	//query based on criteria
 	//query.equalTo("urlStr",document.URL);
-	query.equalTo("urlString", "http://www.google.com");
+	query.equalTo("urlString",  location.hostname);
 
 	query.find({
 	  success: function(results) {
 	  	console.log("download is successfully");
-	    alert("Successfully retrieved " + results.length + " graffitis.");
+	    //alert("Successfully retrieved " + results.length + " graffitis.");
 	    // Do something with the returned Parse.Object values
 	    for (var i = 0; i < results.length; i++) { 
 	      var graffiti = results[i];
