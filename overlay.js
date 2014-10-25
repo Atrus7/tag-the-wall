@@ -1,12 +1,13 @@
 ﻿var css = jQuery('<link href="overlay.css" rel="stylesheet" type="text/css">');
 var overlay = jQuery('<div id="graffiti-overlay"> </div>');
 
-css.appendTo(document.body);
-jquery.appendTo(document.body);
+//css.appendTo(document.body);
+//jquery.appendTo(document.body);
 var pic_x, pic_y;
 pic_x = 108;
 pic_y = 18;
-pic_name = "pnggrad8rgb.png";
+iconURL = chrome.extension.getURL("rainbow.png");
+pic_name = iconURL;
 pic_data="";
 var one_picture = {x: pic_x, y:pic_y, name: pic_name, data:pic_data};
 var all_pictures = [];

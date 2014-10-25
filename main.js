@@ -7,7 +7,6 @@ var stroke;
 var index;
 
 init();
-alert("Yo");
 
 function init() {
     $("body").append('<canvas id="theWall"></canvas>');

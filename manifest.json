@@ -19,8 +19,11 @@
       "matches": ["<all_urls>"],
       "js": ["easeljs.min.js","jquery-2.1.1.min.js", "paintbrushes.js", "main.js", "overlay.js"],
       "css": ["style.css", "overlay.css"]
+
     }
   ],
 
-  "icons": { "16": "calculator-16.png", "128": "logo.png" }
+  "icons": { "16": "calculator-16.png", "128": "logo.png" },
+  "web_accessible_resources": ["rainbow.png"]
+
 }
