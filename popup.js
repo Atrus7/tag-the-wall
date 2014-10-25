@@ -141,6 +141,12 @@ function setBlue(){
 	});
 }
 
+function setYellow(){
+	chrome.tabs.executeScript({
+		code: 'color = YELLOW;'
+	});
+}
+
 
 document.getElementById('load').addEventListener('click',superCoderMasterFunction);
 document.getElementById('save').addEventListener('click', dothatuploadthing);
@@ -149,3 +155,4 @@ document.getElementById('graffiti').addEventListener('click', toggleGraffiti);
 document.getElementById('red').addEventListener('click', setRed);
 document.getElementById('green').addEventListener('click', setGreen);
 document.getElementById('blue').addEventListener('click', setBlue);
+document.getElementById('yellow').addEventListener('click', setYellow);

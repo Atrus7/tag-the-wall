@@ -8,6 +8,7 @@ var index;
 var RED = "#ff0000";
 var BLUE = "#0000ff";
 var GREEN = "#00ff00";
+var YELLOW= "#ffff00";
 var editing = false;
 var name;
 var passed_id;
@@ -172,8 +173,8 @@ function init() {
     stage.addChild(drawingCanvas);
     stage.update();
 
-    canvas.height = document.body.clientHeight;
-    canvas.width = document.body.clientWidth;
+    canvas.height = $(document).height();
+    canvas.width = $(document).width();
 
     color = RED;
     stroke = 10;
