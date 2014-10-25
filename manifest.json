@@ -1,6 +1,6 @@
 ﻿{
-  "name": "Hello World!",
-  "description": "My first Chrome App.",
+  "name": "tag-the-wall",
+  "description": "An app to let you access the underground of the web.",
   "version": "0.1",
   "manifest_version": 2,
   "app": {
@@ -8,5 +8,5 @@
       "scripts": ["background.js"]
     }
   },
-  "icons": { "16": "calculator-16.png", "128": "calculator-128.png" }
+  "icons": { "16": "calculator-16.png", "128": "logo.png" }
 }
