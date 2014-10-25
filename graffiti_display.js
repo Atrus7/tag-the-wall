@@ -10,7 +10,11 @@ $(function() {
   var Graffiti = Parse.Object.extend("Graffiti");
   var query = new Parse.Query(Graffiti);
 
+  // setting the query criteria
   query.equalTo("urlString", getURL());
+  query.descending("upVotes");
+  query.descending("updatedAt");
+  query.limit(3);
 
   var css = jQuery('<link href="overlay.css" rel="stylesheet" type="text/css">');
 
@@ -28,7 +32,8 @@ $(function() {
         var pngUrl = graffiti.get('png').url();
         var left = graffiti.get('left');
         var top = graffiti.get('top');
-        var one_picture = {x: left, y:top, name: title, data:pngUrl};
+        var votes = graffiti.get('upVotes') - graffiti.get('downVotes');
+        var one_picture = {x: left, y:top, name: title, vote: votes, data:pngUrl};
         all_pictures.push(one_picture);
       }
       draw();
