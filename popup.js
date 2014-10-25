@@ -5,7 +5,9 @@ function dothatuploadthing(){
 }
 
 function toggleMode(){
-	$('#toggle').html("Yo this worked");
+	chrome.tabs.executeScript({
+		code: 'toggleMode();'
+	});
 }
 
 document.getElementById('save').addEventListener('click', dothatuploadthing);

@@ -9,10 +9,12 @@ $(function() {
 
 	var Graffiti = Parse.Object.extend("Graffiti");
 	var query = new Parse.Query(Graffiti);
+	var path = location.hostname;
+	if (window.location.pathname.length > 0) path = path + window.location.pathname;
 
 	//query based on criteria
 	//query.equalTo("urlStr",document.URL);
-	query.equalTo("urlString",  location.hostname);
+	query.equalTo("urlString",  path);
 
 	query.find({
 	  success: function(results) {

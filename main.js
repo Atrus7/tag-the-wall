@@ -8,8 +8,11 @@ var index;
 var RED = "#ff0000";
 var BLUE = "#0000ff";
 var GREEN = "#00ff00";
+var editing = false;
 
-
+var path = location.hostname;
+    if (window.location.pathname.length > 0) path = path + window.location.pathname;
+    console.log(path);
 
     Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j", "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
 
@@ -53,7 +56,7 @@ var GREEN = "#00ff00";
             var Website = Parse.Object.extend("Website");
 
             var currentURL = new Website();
-            currentURL.set("url",  location.hostname);
+            currentURL.set("url",  path);
             currentURL.save(null, {
                 success: function(currentURL) {
                 //alert('New object created with objectId: ' + website.id);
@@ -61,7 +64,7 @@ var GREEN = "#00ff00";
                     graffiti.set("png", pngFile);
                     graffiti.set("title", "Mario");
                     graffiti.set("url", currentURL);
-                    graffiti.set("urlString",  location.hostname);
+                    graffiti.set("urlString",  path);
                     graffiti.set("left", 0);
                     graffiti.set("top",0);
                     console.log('saving pngFile');
@@ -75,7 +78,15 @@ var GREEN = "#00ff00";
     }
 
 
-init();
+function toggleMode(){
+    if (editing === true){
+        $("#theWall").remove();
+        editing = false;
+    }else{
+        init();
+        editing = true;
+    }
+}
 
 function init() {
 

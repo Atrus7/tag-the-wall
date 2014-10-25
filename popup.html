@@ -2,15 +2,18 @@
 <html>
 	<head>
 		<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-		
 		<link href="style.css"></style>
 	</head>
 	<body style="width: 300px;">
-		<form name="input" action="demo_form_action.asp" method="get">
-			Username: <input type="text" name="user">
+		<form name="input" method="get">
+			Name your graffiti: <input type="text" name="name">
 			<input id="save" type="submit" value="Save your graffiti">
 		</form>
-		<button id="toggle">Enable Editing Mode</button>
+		<form name="input" method="get">
+			Load private graffiti: <input type="text" name="private">
+			<input id="load" type="submit" value="Load the graffiti">
+		</form>
+		<button id="toggle">Toggle Editing Mode</button>
 		<button id="weight">Set weight</button>
 		<script type="text/javascript" src="popup.js"></script>
 	</body>
