@@ -4,18 +4,58 @@
 		<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="parse-1.3.1.min.js"></script>
 
-		
-		<link href="overlay.css"></style>
+		<link href="overlay.css"></link>
+		<style>
+		button {
+			-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+			-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+			box-shadow:inset 0px 1px 0px 0px #ffffff;
+			background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9) );
+			background:-moz-linear-gradient( center top, #f9f9f9 5%, #e9e9e9 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9');
+			background-color:#f9f9f9;
+			text-indent:0;
+			border:1px solid #dcdcdc;
+			display:inline-block;
+			color:#666666;
+			font-family:Arial;
+			font-size:12px;
+			font-weight:bold;
+			font-style:normal;
+			height:40px;
+			line-height:20px;
+			width:100px;
+			text-decoration:none;
+			text-align:center;
+			text-shadow:1px 1px 0px #ffffff;
+		}
+		button:hover {
+			background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9) );
+			background:-moz-linear-gradient( center top, #e9e9e9 5%, #f9f9f9 100% );
+			filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9');
+			background-color:#e9e9e9;
+		}button:active {
+			position:relative;
+			top:1px;
+		}
+		input{
+			height:30px;
+			font-size: 16px;
+		}
+		</style>
 	</head>
-	<body style="width: 300px;">
+	<body style="width: 450px;">
+		<center><h1>TAG THE WALL</h1>
 
 			Name your graffiti: <input type="text" id="name" name="name"></input>
 			<button id="save" value="Save your graffiti">Save graffiti</button>
 			Load private graffiti: <input id = "private_id" type="text" name="private"></input>
 		<button id="load" value="Load the graffiti">Load graffiti</button>
-		<button id="toggle">Toggle Editing Mode</button>
+		<button id="toggle">Toggle Editing</button>
 		<button id="weight">Set weight</button>
 		<button id="graffiti">Toggle Graffiti</button>
+		</center>
+
 		<script type="text/javascript" src="popup.js"></script>
 	</body>
 <html>
