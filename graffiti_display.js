@@ -1,34 +1,70 @@
-﻿var css = jQuery('<link href="overlay.css" rel="stylesheet" type="text/css">');
-var overlay = jQuery('<div id="graffiti-overlay"> </div>');
+﻿
+$(function() {
 
-//css.appendTo(document.body);
-//jquery.appendTo(document.body);
-var pic_x, pic_y;
-pic_x = 108;
-pic_y = 18;
-iconURL = chrome.extension.getURL("rainbow.png");
-pic_name = iconURL;
-pic_data="";
-var one_picture = {x: pic_x, y:pic_y, name: pic_name, data:pic_data};
-var all_pictures = [];
-//CODE TO loop inserting all of the pictures
-all_pictures.push(one_picture);
+  Parse.$ = jQuery;
 
-if(pic_data =="")
-{
-var pic=jQuery('<img class="graffiti" style = "left:'+ all_pictures[0]["x"] +
-    'px; top: ' + all_pictures[0]["y"] + 'px; z-index: 23881273489127348971234897128935709813475094235788;" src ="' + all_pictures[0]["name"] + '"> </img>');
-}
+  // Initialize Parse with your Parse application javascript keys
+  Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
+    "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
 
-else
-{
-var pic=jQuery('<img class="graffiti" style = "x:'+ all_pictures[0]["x"] +
-    'px; y: ' + all_pictures[0]["y"] + 'px;" src ="' + all_pictures[0]["data"] + '"> </img>');
-}
+  var Graffiti = Parse.Object.extend("Graffiti");
+  var query = new Parse.Query(Graffiti);
 
-pic.appendTo(document.body);
-setOverlaySize();
+  query.equalTo("urlString", getURL());
 
- function setOverlaySize(){
+  var css = jQuery('<link href="overlay.css" rel="stylesheet" type="text/css">');
+
+  var all_pictures = [];
+  query.find({
+    success: function(results) {
+      console.log("download is successfully");
+      alert("Successfully retrieved " + results.length + " graffitis.");
+      // Do something with the returned Parse.Object values
+      for (var i = 0; i < results.length; i++) { 
+        //CODE TO loop inserting all of the pictures
+        var graffiti = results[i];
+        var title = graffiti.get('title');
+        var imagePath = chrome.extension.getURL(title);
+        var pngUrl = graffiti.get('png').url();
+        var left = graffiti.get('left');
+        var top = graffiti.get('top');
+        var one_picture = {x: left, y:top, name: title, data:pngUrl};
+        all_pictures.push(one_picture);
+      }
+      draw();
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+  function draw()
+  {
+    for(var i=0; i<all_pictures.length; i++){
+      alert(all_pictures[i]["data"]);
+        var pic=jQuery('<img class="graffiti" style = "left:'+ all_pictures[i]["x"] +
+            'px; top: ' + all_pictures[i]["y"] + 'px; z-index: 23881273489127348971234897128935709813475094235788;" src ="' + all_pictures[i]["data"] + '"> </img>');
+        //iconURL = chrome.extension.getURL("rainbow.png");
+        //iconURL = chrome.extension.getURL("rainbow.png");
+        //pic_name = iconURL;
+        //pic_name = iconURL;
+
+      pic.appendTo(document.body);
+    }
+  }
+  setOverlaySize();
+
+  function setOverlaySize(){
     $(".graffiti").css("z-index", 19238478239742349870000);
-        }
+            }
+  function getURL() {
+    var x = location.hostname;
+    return x;
+  }
+
+  //query based on criteria
+  //query.equalTo("urlStr",document.URL);
+
+  //iconURL = chrome.extension.getURL("rainbow.png");
+  //pic_name = iconURL;
+
+});
