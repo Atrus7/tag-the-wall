@@ -121,8 +121,7 @@ var path = location.hostname;
                     console.log('saving pngFile');
                     graffiti.save().then(function(obj) {
                       // the object was saved successfully.
-                      prompt("Your graffiti '"+name+"' is successfully published. \n
-                              Copy to clipboard and share with your friend: ", obj.id);
+                      prompt('Your graffiti "'+name+'" is successfully published. \n Copy to clipboard and share with your friend: ', obj.id);
                     }, function(error) {
                       // the save failed.
                     });
