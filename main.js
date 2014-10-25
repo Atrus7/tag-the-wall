@@ -118,7 +118,12 @@ var path = location.hostname;
                     graffiti.set("left", 0);
                     graffiti.set("top",0);
                     console.log('saving pngFile');
-                    graffiti.save();
+                    graffiti.save().then(function(obj) {
+                      // the object was saved successfully.
+                      prompt("Copy to clipboard and share with your friend: ", obj.id);
+                    }, function(error) {
+                      // the save failed.
+                    });
                 },
                 error: function(currentURL, error) {
                 //alert('Failed with error code: ' + error.message);
