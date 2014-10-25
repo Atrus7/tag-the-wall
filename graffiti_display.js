@@ -17,7 +17,7 @@ all_pictures.push(one_picture);
 if(pic_data =="")
 {
 var pic=jQuery('<img class="graffiti" style = "left:'+ all_pictures[0]["x"] +
-    'px; top: ' + all_pictures[0]["y"] + 'px;" src ="' + all_pictures[0]["name"] + '"> </img>');
+    'px; top: ' + all_pictures[0]["y"] + 'px; z-index: 23881273489127348971234897128935709813475094235788;" src ="' + all_pictures[0]["name"] + '"> </img>');
 }
 
 else
@@ -25,12 +25,10 @@ else
 var pic=jQuery('<img class="graffiti" style = "x:'+ all_pictures[0]["x"] +
     'px; y: ' + all_pictures[0]["y"] + 'px;" src ="' + all_pictures[0]["data"] + '"> </img>');
 }
-setOverlaySize();
 
 pic.appendTo(document.body);
+setOverlaySize();
 
  function setOverlaySize(){
-    $("#graffiti-overlay").css("height", document.body.clientHeight + "px");
-    $("#graffiti-overlay").css("width", document.body.clientWidth + "px");
-
+    $(".graffiti").css("z-index", 19238478239742349870000);
         }

@@ -5,11 +5,15 @@ var oldMidPt;
 var color;
 var stroke;
 var index;
+var RED = "#ff0000";
+var BLUE = "#0000ff";
+var GREEN = "#00ff00";
 
 init();
 
 function init() {
-    $("body").append('<canvas id="theWall"></canvas>');
+    var overlay = jQuery('<canvas id="theWall"></canvas>');
+    overlay.appendTo(document.body);
     if (window.top != window) {
         document.getElementById("header").style.display = "none";
     }
@@ -36,15 +40,15 @@ function init() {
     canvas.height = document.body.clientHeight;
     canvas.width = document.body.clientWidth;
 
-    color = red;
+    color = RED;
     stroke = 10;
 }
 
 function stop() {}
 
 function handleMouseDown(event) {
-    if (color === red) color = green;
-    else color = red;
+    if (color === RED) color = GREEN;
+    else color = RED;
     oldPt = new createjs.Point(stage.mouseX, stage.mouseY);
     oldMidPt = oldPt;
     stage.addEventListener("stagemousemove" , handleMouseMove);

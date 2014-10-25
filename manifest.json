@@ -17,8 +17,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["easeljs.min.js","jquery-2.1.1.min.js", "paintbrushes.js", "main.js", "overlay.js"],
-      "css": ["style.css", "overlay.css"]
+      "js": ["easeljs.min.js","jquery-2.1.1.min.js", "main.js", "graffiti_display.js"],
+      "css": ["overlay.css", "graffiti_display.css"]
 
     }
   ],
