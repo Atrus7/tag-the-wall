@@ -10,6 +10,7 @@ var BLUE = "#0000ff";
 var GREEN = "#00ff00";
 var editing = false;
 var name;
+var passed_id;
 
 var path = location.hostname;
     if (window.location.pathname.length > 0) path = path + window.location.pathname;
@@ -35,25 +36,48 @@ var path = location.hostname;
     });
     function loadPrivate()
     {
-        passed_id = $("#private_id").val();
-        var shared_id = passed_id;
+
+        
         if(passed_id=="")
         {
-            alert("Can't lookup blank field");
+            console.log("Can't lookup blank field");
         }
         else
         {
-            alert(passed_id);
+            console.log(passed_id);
 
-        
-            Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
-            "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
+              Parse.$ = jQuery;
 
-          var share_graffiti = Parse.Object.extend("Graffiti");
-          var query = new Parse.Query(share_graffiti);
+  // Initialize Parse with your Parse application javascript keys
+             Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
+    "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
+
+            var Graffiti = Parse.Object.extend("Graffiti");
+            var query = new Parse.Query(Graffiti);
 
           // setting the query criteria
-          query.equalTo("id", shared_id);
+          query.get(passed_id, {
+          success: function(result) {
+            console.log("download is successfull");
+            // Do something with the returned Parse.Object values
+            var graffiti = result;
+            var title = graffiti.get('title');
+            var imagePath = chrome.extension.getURL(title);
+            var pngUrl = graffiti.get('png').url();
+            var left = graffiti.get('left');
+            var top = graffiti.get('top');
+            var votes = graffiti.get('upVotes') - graffiti.get('downVotes');
+            var one_picture = {x: left, y:top, name: title, vote: votes, data:pngUrl};
+            var pic=jQuery('<img class="graffiti" style = "left:'+ one_picture["x"] +
+            'px; top: ' + one_picture["y"] + 'px; z-index: 23881273489127348971234897128935709813475094235788;" src ="' + one_picture["data"] + '"> </img>');
+             pic.appendTo(document.body);
+              console.log(pngUrl);
+        
+          },
+          error: function(error) {
+            alert("Error: " + error.code + " " + error.message);
+          }
+        });
         }
 
     }

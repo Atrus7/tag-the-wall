@@ -10,6 +10,9 @@ function dothatuploadthing(){
 
 function loadPrivateCall(){
 	chrome.tabs.executeScript({
+		code: 'passed_id = "' + $("#private_id").val() + '";'
+	});
+	chrome.tabs.executeScript({
 		code: 'loadPrivate();'
 	});
 }
