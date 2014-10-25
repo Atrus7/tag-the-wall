@@ -42,14 +42,32 @@
 			height:30px;
 			font-size: 16px;
 		}
+		#graff-bg{
+			background-image: url("graffiti-wall.jpg");
+			background-position-x: 1300px;
+			background-position-y: -10px;
+		}
+		::-webkit-input-placeholder {
+		 font-size: 12px;
+		 color: #d3d3d3 ;
+		 text-align: center;
+		 font-family: Arial, Helvetica, sans-serif;
+		 font-weight: lighter;
+
+		}
+		.first-row{
+			margin-left: 75px;
+
+
+		}
 		</style>
 	</head>
-	<body style="width: 500px;">
-		<center><h1>TAG THE WALL</h1>
-			Name your graffiti: <input type="text" id="title" name="title"></input>
+	<body id="graff-bg" style="  width: 500px;">
+		<center><h1 style = "color: rgb(25,210,254);">TAG THE WALL</h1>
+			<input class = "first-row" type="text" id="title" name="title" placeholder="Name your work"></input>
 			<button id="save" value="Save your graffiti">Save graffiti</button>
 			<br><br>
-			Load private graffiti: <input id = "private_id" type="text" name="private"></input>
+			 <input id = "private_id" class = "first-row" type="text" placeholder="Load private graffiti" name="private"></input>
 		<button id="load" value="Load the graffiti">Load graffiti</button>
 		<br><br>
 		<button id="toggle">Toggle Editing</button>
