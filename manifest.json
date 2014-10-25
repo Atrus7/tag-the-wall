@@ -1,12 +1,11 @@
 ﻿{
-  "name": "tag-the-wall",
+  "name": "Tag The Wall",
   "description": "An app to let you access the underground of the web.",
   "version": "0.1",
   "manifest_version": 2,
-  "app": {
-    "background": {
-      "scripts": ["background.js"]
-    }
+  "browser_action": {
+    "default_icon": "calculator-16.png",
+    "default_popup": "popup.html"
   },
   "icons": { "16": "calculator-16.png", "128": "logo.png" }
 }
