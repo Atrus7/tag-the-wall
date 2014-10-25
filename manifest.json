@@ -1,12 +1,11 @@
 ﻿{
-  "name": "Hello World!",
-  "description": "My first Chrome App.",
+  "name": "Tag The Wall",
+  "description": "Graffiti up the web",
   "version": "0.1",
   "manifest_version": 2,
-  "app": {
-    "background": {
-      "scripts": ["background.js"]
-    }
+  "browser_action": {
+    "default_icon": "calculator-16.png",
+    "default_popup": "popup.html"
   },
   "icons": { "16": "calculator-16.png", "128": "calculator-128.png" }
 }
