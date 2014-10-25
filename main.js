@@ -135,7 +135,7 @@ function toggleMode(){
 
 function toggleGraffiti(){
     $(".graffiti").toggle();
-    toggleMode();
+    //toggleMode();
 }
 
 function init() {
@@ -177,8 +177,6 @@ function init() {
 function stop() {}
 
 function handleMouseDown(event) {
-    if (color === RED) color = GREEN;
-    else color = RED;
     oldPt = new createjs.Point(stage.mouseX, stage.mouseY);
     oldMidPt = oldPt;
     stage.addEventListener("stagemousemove" , handleMouseMove);
