@@ -1,67 +1,75 @@
 var canvas, stage;
-        var drawingCanvas;
-        var oldPt;
-        var oldMidPt;
-        var color;
-        var stroke;
-        var index;
+var drawingCanvas;
+var oldPt;
+var oldMidPt;
+var color;
+var stroke;
+var index;
 
-        function init() {
-            if (window.top != window) {
-                document.getElementById("header").style.display = "none";
-            }
-            canvas = document.getElementById("theWall");
-            index = 0;
+init();
+alert("Yo");
 
-            //check to see if we are running in a browser with touch support
-            stage = new createjs.Stage(canvas);
-            stage.autoClear = false;
-            stage.enableDOMEvents(true);
+function init() {
+    $("body").append("<canvas id="theWall"></canvas>");
+    if (window.top != window) {
+        document.getElementById("header").style.display = "none";
+    }
+    canvas = document.getElementById("theWall");
 
-            createjs.Touch.enable(stage);
-            createjs.Ticker.setFPS(60);
+    index = 0;
 
-            drawingCanvas = new createjs.Shape();
+    //check to see if we are running in a browser with touch support
+    stage = new createjs.Stage(canvas);
+    stage.autoClear = false;
+    stage.enableDOMEvents(true);
 
-            stage.addEventListener("stagemousedown", handleMouseDown);
-            stage.addEventListener("stagemouseup", handleMouseUp);
+    createjs.Touch.enable(stage);
+    createjs.Ticker.setFPS(60);
 
-            stage.addChild(drawingCanvas);
-            stage.update();
+    drawingCanvas = new createjs.Shape();
 
-            canvas.height = document.body.clientHeight;
-            canvas.width = document.body.clientWidth;
-        }
+    stage.addEventListener("stagemousedown", handleMouseDown);
+    stage.addEventListener("stagemouseup", handleMouseUp);
 
-        function stop() {}
+    stage.addChild(drawingCanvas);
+    stage.update();
 
-        function handleMouseDown(event) {
-            color = "#ff0000";
-            stroke = 5;
-            oldPt = new createjs.Point(stage.mouseX, stage.mouseY);
-            oldMidPt = oldPt;
-            stage.addEventListener("stagemousemove" , handleMouseMove);
-        }
+    canvas.height = document.body.clientHeight;
+    canvas.width = document.body.clientWidth;
 
-        function handleMouseMove(event) {
-            var midPt = new createjs.Point(oldPt.x + stage.mouseX>>1, oldPt.y+stage.mouseY>>1);
+    color = red;
+    stroke = 10;
+}
 
-            drawingCanvas.graphics.clear().setStrokeStyle(stroke, 'round', 'round').beginStroke(color).moveTo(midPt.x, midPt.y).curveTo(oldPt.x, oldPt.y, oldMidPt.x, oldMidPt.y);
+function stop() {}
 
-            oldPt.x = stage.mouseX;
-            oldPt.y = stage.mouseY;
+function handleMouseDown(event) {
+    if (color === red) color = green;
+    else color = red;
+    oldPt = new createjs.Point(stage.mouseX, stage.mouseY);
+    oldMidPt = oldPt;
+    stage.addEventListener("stagemousemove" , handleMouseMove);
+}
 
-            oldMidPt.x = midPt.x;
-            oldMidPt.y = midPt.y;
+function handleMouseMove(event) {
+    var midPt = new createjs.Point(oldPt.x + stage.mouseX>>1, oldPt.y+stage.mouseY>>1);
 
-            stage.update();
-        }
+    drawingCanvas.graphics.clear().setStrokeStyle(stroke, 'round', 'round').beginStroke(color).moveTo(midPt.x, midPt.y).curveTo(oldPt.x, oldPt.y, oldMidPt.x, oldMidPt.y);
 
-        function handleMouseUp(event) {
-            stage.removeEventListener("stagemousemove" , handleMouseMove);
-        }
+    oldPt.x = stage.mouseX;
+    oldPt.y = stage.mouseY;
 
-        window.onresize = function setCanvasSize(){
-            canvas.height = document.body.clientHeight;
-            canvas.width = document.body.clientWidth;
-        }
+    oldMidPt.x = midPt.x;
+    oldMidPt.y = midPt.y;
+
+    stage.update();
+}
+
+function handleMouseUp(event) {
+    stage.removeEventListener("stagemousemove" , handleMouseMove);
+}
+
+// window.onresize = function setCanvasSize(){
+//     canvas.height = document.body.clientHeight;
+//     canvas.width = document.body.clientWidth;
+// }
