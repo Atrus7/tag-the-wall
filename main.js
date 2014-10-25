@@ -12,16 +12,10 @@ var GREEN = "#00ff00";
 init();
 
 function init() {
-<<<<<<< Updated upstream
+
     var overlay = jQuery('<canvas id="theWall"></canvas>');
     overlay.appendTo(document.body);
-=======
-    $("body").append('<canvas id="theWall" style="position: absolute;
-overflow: hidden;
-pointer-events: none;
-opacity: 1;
-    z-index: 2387465723465872364587623874568732645736457638475637465873465873645876473658736458736587638475638746587346578364587368756387645783654837638745687346587364587346512837594182374981723948712938471938471982734981723948719283471982374981273489127348971234897128935709813475094235788;"></canvas>');
->>>>>>> Stashed changes
+
     if (window.top != window) {
         document.getElementById("header").style.display = "none";
     }
