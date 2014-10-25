@@ -1,7 +1,7 @@
 function dothatuploadthing(){
 	//console.log("Hello");
 	chrome.tabs.executeScript({
-		code: 'name = ' + $("#name").val() + ';'
+		code: 'name = "' + $("#name").val() + '";'
 	});
 	chrome.tabs.executeScript({
 		code: 'upload();'
@@ -76,7 +76,7 @@ function superCoderMasterFunction()
 	
 	console.log(url);
 
-	//loadPrivateCall();
+	loadPrivateCall();
 }
 
 

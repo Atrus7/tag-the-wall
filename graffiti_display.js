@@ -10,8 +10,12 @@ $(function() {
   var Graffiti = Parse.Object.extend("Graffiti");
   var query = new Parse.Query(Graffiti);
 
+  var path = location.hostname;
+  if (window.location.pathname.length > 1) path = path + window.location.pathname;
+    if (path.slice(-1) === "/") path = path.substring(0, str.length - 1);
+
   // setting the query criteria
-  query.equalTo("urlString", getURL());
+  query.equalTo("urlString", path);
   query.descending("upVotes");
   query.descending("updatedAt");
   query.limit(3);
