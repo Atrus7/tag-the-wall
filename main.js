@@ -9,12 +9,12 @@ var RED = "#ff0000";
 var BLUE = "#0000ff";
 var GREEN = "#00ff00";
 var editing = false;
-var name;
+var name = "testimage.png";
 var passed_id;
 var thaturl;
 
 var path = location.hostname;
-    if (window.location.pathname.length > 0) path = path + window.location.pathname;
+    if (window.location.pathname.length !== 1) path = path + window.location.pathname;
     console.log(path);
 
     Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j", "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
@@ -82,7 +82,7 @@ var path = location.hostname;
         }
     }
 
-    function fileUpload(name, data){
+    function fileUpload(data){
 
         var fileUploadControl = $("#profilePhotoFileUpload")[0];
         
@@ -200,10 +200,10 @@ function handleMouseUp(event) {
     stage.removeEventListener("stagemousemove" , handleMouseMove);
 }
 
-function upload(name){
+function upload(){
     //alert("yo");
-    fileUpload(name, canvas.toDataURL("image/png"));
-    console.log(name);
+    fileUpload(canvas.toDataURL("image/png"));
+    //console.log(name);
     //console.log(canvas.toDataURL("image/png"));
 }
 
