@@ -11,6 +11,7 @@ var GREEN = "#00ff00";
 var editing = false;
 var name;
 var passed_id;
+var thaturl;
 
 var path = location.hostname;
     if (window.location.pathname.length > 0) path = path + window.location.pathname;
@@ -79,7 +80,6 @@ var path = location.hostname;
           }
         });
         }
-
     }
 
     function fileUpload(name, data){
