@@ -22,6 +22,7 @@ $(function() {
   query.find({
     success: function(results) {
       console.log("download is successfully");
+      //alert("Successfully retrieved " + results.length + " graffitis.");
       // Do something with the returned Parse.Object values
       for (var i = 0; i < results.length; i++) { 
         //CODE TO loop inserting all of the pictures
@@ -44,7 +45,6 @@ $(function() {
   function draw()
   {
     for(var i=0; i<all_pictures.length; i++){
-        var pic=jQuery('<img class="graffiti" style = "left:'+ all_pictures[i]["x"] +
             'px; top: ' + all_pictures[i]["y"] + 'px; z-index: 23881273489127348971234897128935709813475094235788;" src ="' + all_pictures[i]["data"] + '"> </img>');
       pic.appendTo(document.body);
     }

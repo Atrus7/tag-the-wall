@@ -11,11 +11,11 @@ $(function() {
 
 	website.save(null, {
 		success: function(website) {
-			alert('New object created with objectId: ' + website.id);
+			//alert('New object created with objectId: ' + website.id);
 			$(".success").show();
 		},
 		error: function(website, error) {
-			alert('Failed with error code: ' + error.message);
+			//alert('Failed with error code: ' + error.message);
 		}
 	});
 
@@ -31,7 +31,7 @@ $(function() {
 		var fileUploadControl = $("#profilePhotoFileUpload")[0];
 		
 
-		if (fileUploadControl.files.length > 0) {
+		//if (fileUploadControl.files.length > 0) {
 			//var file = fileUploadControl.files[0];
 			var file = data;
 			console.log('File: ',file);
@@ -52,7 +52,7 @@ $(function() {
 			var Website = Parse.Object.extend("Website");
 
 			var currentURL = new Website();
-			currentURL.set("url", document.URL);
+			currentURL.set("url",  location.hostname);
 			currentURL.save(null, {
 				success: function(currentURL) {
 				//alert('New object created with objectId: ' + website.id);
@@ -60,7 +60,7 @@ $(function() {
 					graffiti.set("png", pngFile);
 					graffiti.set("title", "Mario");
 					graffiti.set("url", currentURL);
-					graffiti.set("urlString", document.URL);
+					graffiti.set("urlString",  location.hostname);
 					console.log('saving pngFile');
 					graffiti.save();
 				},
@@ -68,7 +68,7 @@ $(function() {
 				//alert('Failed with error code: ' + error.message);
 				}	
 			});
-		}
+		//}
 
 
 

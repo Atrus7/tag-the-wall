@@ -2,10 +2,16 @@
 <html>
 	<head>
 		<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+		
 		<link href="style.css"></style>
 	</head>
 	<body style="width: 300px;">
-		<button id="share">Share this graffiti</button>
+		<form name="input" action="demo_form_action.asp" method="get">
+			Username: <input type="text" name="user">
+			<input id="save" type="submit" value="Save your graffiti">
+		</form>
+		<button id="toggle">Enable Editing Mode</button>
 		<button id="weight">Set weight</button>
+		<script type="text/javascript" src="popup.js"></script>
 	</body>
 <html>
