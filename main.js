@@ -135,6 +135,7 @@ function toggleMode(){
 
 function toggleGraffiti(){
     $(".graffiti").toggle();
+    toggleMode();
 }
 
 function init() {
