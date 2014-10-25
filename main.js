@@ -9,6 +9,7 @@ var RED = "#ff0000";
 var BLUE = "#0000ff";
 var GREEN = "#00ff00";
 var editing = false;
+var name;
 
 var path = location.hostname;
     if (window.location.pathname.length > 0) path = path + window.location.pathname;
@@ -33,7 +34,7 @@ var path = location.hostname;
         }
     });
 
-    function fileUpload(data){
+    function fileUpload(name, data){
 
         var fileUploadControl = $("#profilePhotoFileUpload")[0];
         
@@ -62,7 +63,7 @@ var path = location.hostname;
                 //alert('New object created with objectId: ' + website.id);
                 //$(".success").show();
                     graffiti.set("png", pngFile);
-                    graffiti.set("title", "Mario");
+                    graffiti.set("title", name);
                     graffiti.set("url", currentURL);
                     graffiti.set("urlString",  path);
                     graffiti.set("left", 0);
@@ -77,15 +78,15 @@ var path = location.hostname;
         //}
     }
 
+init();
 
 function toggleMode(){
-    if (editing === true){
-        $("#theWall").remove();
-        editing = false;
-    }else{
-        init();
-        editing = true;
-    }
+    editing = !editing;
+    $("#theWall").toggle();
+}
+
+function toggleGraffiti(){
+    $(".graffiti").toggle();
 }
 
 function init() {
@@ -121,6 +122,7 @@ function init() {
 
     color = RED;
     stroke = 10;
+    $("#theWall").toggle();
 }
 
 function stop() {}
@@ -151,9 +153,10 @@ function handleMouseUp(event) {
     stage.removeEventListener("stagemousemove" , handleMouseMove);
 }
 
-function upload(){
+function upload(name){
     //alert("yo");
-    fileUpload(canvas.toDataURL("image/png"));
+    fileUpload(name, canvas.toDataURL("image/png"));
+    console.log(name);
     //console.log(canvas.toDataURL("image/png"));
 }
 
