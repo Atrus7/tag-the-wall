@@ -12,8 +12,10 @@ var GREEN = "#00ff00";
 init();
 
 function init() {
+
     var overlay = jQuery('<canvas id="theWall"></canvas>');
     overlay.appendTo(document.body);
+
     if (window.top != window) {
         document.getElementById("header").style.display = "none";
     }
