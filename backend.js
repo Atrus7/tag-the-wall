@@ -3,28 +3,28 @@ $(function() {
 	Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j", "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
 
 	// Create a Website object, which is a subclass of Parse.Object
-	var Website = Parse.Object.extend("Website");
-	// Create a new instance of Website
-	var website = new Website();
+	// var Website = Parse.Object.extend("Website");
+	// // Create a new instance of Website
+	// var website = new Website();
 
-	website.set("url", "Hello World!");
+	// website.set("url", "Hello World!");
 
-	website.save(null, {
-		success: function(website) {
-			//alert('New object created with objectId: ' + website.id);
-			$(".success").show();
-		},
-		error: function(website, error) {
-			//alert('Failed with error code: ' + error.message);
-		}
-	});
+	// website.save(null, {
+	// 	success: function(website) {
+	// 		//alert('New object created with objectId: ' + website.id);
+	// 		$(".success").show();
+	// 	},
+	// 	error: function(website, error) {
+	// 		//alert('Failed with error code: ' + error.message);
+	// 	}
+	// });
 
 
-	// Click button event response
-	$('#fileToUpload').click(function(){
-		alert('button is clicked');
-		fileUpload();
-	});
+	// // Click button event response
+	// $('#fileToUpload').click(function(){
+	// 	alert('button is clicked');
+	// 	fileUpload();
+	// });
 
 	function fileUpload(data){
 
