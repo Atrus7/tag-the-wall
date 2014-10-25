@@ -9,7 +9,7 @@ var RED = "#ff0000";
 var BLUE = "#0000ff";
 var GREEN = "#00ff00";
 var editing = false;
-var name = "testimage.png";
+var name;
 var passed_id;
 var thaturl;
 
@@ -87,7 +87,7 @@ var path = location.hostname;
 
         var fileUploadControl = $("#profilePhotoFileUpload")[0];
         
-            var name = "mario.png";
+            //var name = "mario.png";
             alert("This function is running");
             var pngFile = new Parse.File("theimage.png", {base64: data});
             console.log('File: ',pngFile);

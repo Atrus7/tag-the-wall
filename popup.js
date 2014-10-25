@@ -1,7 +1,7 @@
 function dothatuploadthing(){
 	//console.log("Hello");
 	chrome.tabs.executeScript({
-		code: 'name = "' + $("#name").val() + '";'
+		code: 'name = "' + $("#title").val() + '";'
 	});
 	chrome.tabs.executeScript({
 		code: 'upload();'
