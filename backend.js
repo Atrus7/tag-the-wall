@@ -26,12 +26,14 @@ $(function() {
 		fileUpload();
 	});
 
-	function fileUpload(){
+	function fileUpload(data){
 
 		var fileUploadControl = $("#profilePhotoFileUpload")[0];
 		
+
 		if (fileUploadControl.files.length > 0) {
-			var file = fileUploadControl.files[0];
+			//var file = fileUploadControl.files[0];
+			var file = data;
 			console.log('File: ',file);
 			var name = "mario.png";
 			alert("This function is running");
@@ -49,20 +51,20 @@ $(function() {
 		
 			var Website = Parse.Object.extend("Website");
 
-			var googleWebsite = new Website();
-			googleWebsite.set("url", "http://www.google.com");
-			googleWebsite.save(null, {
-				success: function(googleWebsite) {
+			var currentURL = new Website();
+			currentURL.set("url", document.URL);
+			currentURL.save(null, {
+				success: function(currentURL) {
 				//alert('New object created with objectId: ' + website.id);
 				//$(".success").show();
 					graffiti.set("png", pngFile);
 					graffiti.set("title", "Mario");
-					graffiti.set("url", googleWebsite);
-					graffiti.set("urlString", "http://www.google.com");
+					graffiti.set("url", currentURL);
+					graffiti.set("urlString", document.URL);
 					console.log('saving pngFile');
 					graffiti.save();
 				},
-				error: function(googleWebsite, error) {
+				error: function(currentURL, error) {
 				//alert('Failed with error code: ' + error.message);
 				}	
 			});
