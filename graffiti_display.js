@@ -1,5 +1,5 @@
 ﻿
-$(function() {
+function loadPublic() {
 
   Parse.$ = jQuery;
 
@@ -64,4 +64,4 @@ $(function() {
     return x;
   }
 
-});
+}
