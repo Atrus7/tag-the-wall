@@ -1,5 +1,4 @@
 function dothatuploadthing() {
-    //console.log("Hello");
     chrome.tabs.executeScript({
         code: 'name = "' + $("#title").val() + '";upload();'
     });
@@ -55,14 +54,6 @@ function superCoderMasterFunction() {
                         url: "http://" + url
                     }
                 );
-    //     		chrome.tabs.executeScript({
-				// 	code: 'window.open("http://'+url+'", "_self"); $(document).ready(function() {alert("document is ready");});'}
-				// );
-
-
-
-                //loadPrivateCall();
-
             },
             error: function(error) {
                 alert("Error: " + error.code + " " + error.message);
@@ -70,46 +61,6 @@ function superCoderMasterFunction() {
         });
     }
 }
-
-
-
-
-
-function getRightUrl() {
-    var passed_id = String($("#private_id").val());
-    var url = "";
-    if (passed_id == "") {
-        console.log("Can't lookup blank field");
-    } else {
-        console.log(passed_id);
-
-        Parse.$ = jQuery;
-
-        // Initialize Parse with your Parse application javascript keys
-        Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
-            "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
-
-        var Graffiti = Parse.Object.extend("Graffiti");
-        var query = new Parse.Query(Graffiti);
-
-        // setting the query criteria
-        query.get(passed_id, {
-            success: function(result) {
-                console.log("download is successfull");
-                // Do something with the returned Parse.Object values
-                var graffiti = result;
-                url = graffiti.get('urlString');
-                console.log(url);
-
-            },
-            error: function(error) {
-                alert("Error: " + error.code + " " + error.message);
-            }
-        });
-    }
-    return url;
-}
-
 
 function setRed() {
     chrome.tabs.executeScript({
