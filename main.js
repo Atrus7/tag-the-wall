@@ -15,6 +15,7 @@ var passed_id;
 var thaturl;
 var viewPrivate = false;
 var turl;
+var sprivate = false;
 
 var path = location.hostname;
 if (window.location.pathname.length > 1) path = path + window.location.pathname;
@@ -201,6 +202,7 @@ function fileUpload(data) {
             graffiti.set("urlString", path);
             graffiti.set("left", 0);
             graffiti.set("top", 0);
+            graffiti.set("isPrivate", sprivate);
             console.log('saving pngFile');
             graffiti.save().then(function(obj) {
                 // the object was saved successfully.

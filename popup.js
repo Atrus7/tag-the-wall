@@ -1,6 +1,9 @@
 function dothatuploadthing() {
+	chrome.tabs.executeScript({
+        code: 'sprivate = ' + $("#private").is(":checked") + ';'
+    });
     chrome.tabs.executeScript({
-        code: 'name = "' + $("#title").val() + '";upload();'
+        code: 'name = "' + $("#title").val() + '"; upload();'
     });
 }
 
