@@ -6,6 +6,17 @@
 
 		<link href="overlay.css"></link>
 		<style>
+		h1{
+			font-size: 36px; -webkit-text-stroke: 1px black;
+		    color: white;
+		    text-shadow:
+			3px 3px 0 #000,
+			-1px -1px 0 #000,  
+			1px -1px 0 #000,
+			-1px 1px 0 #000,
+			1px 1px 0 #000;
+			font-family: 'Comic Sans MS';
+		}
 		button {
 			-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 			-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -57,15 +68,18 @@
 		}
 		.first-row{
 			margin-left: 75px;
-
-
 		}
+
 		</style>
 	</head>
-	<body id="graff-bg" style="  width: 500px;">
-		<center><h1 style = "color: rgb(25,210,254);">TAG THE WALL</h1>
+	<body id="graff-bg" style="width: 500px;">
+		<center>
+		<h1>
+			<span style="color: blue;">G</span><span style="color: red;">O</span><span style="color: yellow;">O</span><span style="color: blue;">G</span><span style="color: green;">L</span><span style="color: red;">F</span><span style="color: yellow;">F</span><span style="color: blue;">I</span><span style="color: green;">T</span><span style="color: red;">I</span>
+		</h1>
 			<input class = "first-row" type="text" id="title" name="title" placeholder="Name your work"></input>
 			<button id="save" value="Save your graffiti">Save graffiti</button>
+			<input type="checkbox" name="private" id="private" checked="false">Private<br>
 			<br><br>
 			 <input id = "private_id" class = "first-row" type="text" placeholder="Load private graffiti" name="private"></input>
 		<button id="load" value="Load the graffiti">Load graffiti</button>
@@ -77,7 +91,7 @@
 		<button id="red" style="color: red;">Red</button>
 		<button id="green" style="color: green;">Green</button>
 		<button id="blue" style="color: blue;">Blue</button>
-		<button id="yellow" style="color: yellow;">Yellow</button>
+		<button id="yellow" style="color: gold">Yellow</button>
 		<br>
 		<br>
 		</center>
