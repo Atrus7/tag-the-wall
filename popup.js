@@ -25,6 +25,12 @@ function toggleGraffiti() {
     });
 } 
 
+function setWeight(){
+	chrome.tabs.executeScript({
+		code: 'stroke = ' + $("#w").val() + ';'
+	});
+}
+
 function superCoderMasterFunction() {
 	
     console.log("Starting super function");
@@ -98,3 +104,4 @@ document.getElementById('red').addEventListener('click', setRed);
 document.getElementById('green').addEventListener('click', setGreen);
 document.getElementById('blue').addEventListener('click', setBlue);
 document.getElementById('yellow').addEventListener('click', setYellow);
+document.getElementById('setweight').addEventListener('click', setWeight);
