@@ -22,6 +22,8 @@ if (window.location.pathname.length > 1) path = path + window.location.pathname;
 if (path.slice(-1) === "/") path = path.substring(0, path.length - 1);
 //console.log(path);
 
+Parse.$ = jQuery;
+
 Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
         "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
 
@@ -45,11 +47,11 @@ website.save(null, {
 function loadPublic() {
     viewPrivate = false;
 
-    Parse.$ = jQuery;
+    // Parse.$ = jQuery;
 
     // Initialize Parse with your Parse application javascript keys
-    Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
-        "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
+    // Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
+    //     "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
 
     var Graffiti = Parse.Object.extend("Graffiti");
     var query = new Parse.Query(Graffiti);
@@ -125,11 +127,11 @@ function loadPrivate() {
     } else {
         console.log(passed_id);
 
-        Parse.$ = jQuery;
+        
 
         // Initialize Parse with your Parse application javascript keys
-        Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
-            "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
+        // Parse.initialize("CVbYCUyIgQ255dpPxaRyx8uaR70t8gvUhmK29C3j",
+        //     "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
 
         var Graffiti = Parse.Object.extend("Graffiti");
         var query = new Parse.Query(Graffiti);
