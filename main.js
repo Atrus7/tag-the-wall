@@ -175,10 +175,10 @@ function fileUpload(data) {
     var pngFile = new Parse.File("theimage.png", {
         base64: data
     });
-    console.log('File: ', pngFile);
+    //console.log('File: ', pngFile);
     pngFile.save().then(function() {
         // The file has been saved to Parse.
-        console.log('1: ', pngFile);
+        //console.log('1: ', pngFile);
     }, function(error) {
         // The file either could not be read, or could not be saved to Parse.
         alert('2: ' + error.message);
@@ -203,7 +203,7 @@ function fileUpload(data) {
             graffiti.set("left", 0);
             graffiti.set("top", 0);
             graffiti.set("isPrivate", sprivate);
-            console.log('saving pngFile');
+            //console.log('saving pngFile');
             graffiti.save().then(function(obj) {
                 // the object was saved successfully.
                 prompt('Your graffiti "' + name + '" is successfully published. \n Copy to clipboard and share with your friend: ', obj.id);
@@ -310,13 +310,5 @@ function handleMouseUp(event) {
 }
 
 function upload() {
-    //alert("yo");
     fileUpload(canvas.toDataURL("image/png"));
-    //console.log(name);
-    //console.log(canvas.toDataURL("image/png"));
 }
-
-// window.onresize = function setCanvasSize(){
-//     canvas.height = document.body.clientHeight;
-//     canvas.width = document.body.clientWidth;
-// }
