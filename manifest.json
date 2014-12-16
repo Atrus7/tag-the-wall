@@ -14,14 +14,16 @@
 	"background":{
 		"scripts": ["background.js"],
 		"persistant": true
-		},
-		"content_scripts": [
-		{
-			"matches": ["<all_urls>"],
-			"js": ["easeljs.min.js","jquery-2.1.1.min.js", "parse-1.3.1.min.js", "parseinit.js", "graffiti_display.js", "main.js" ],
-			"css": ["overlay.css", "graffiti_display.css"]
-		}
-	  ],
+	},
+	"content_scripts": 
+	[{
+		"matches": ["<all_urls>"],
+		"js": ["easeljs.min.js","jquery-2.1.1.min.js", "parse-1.3.1.min.js", "parseinit.js", "graffiti_display.js", "main.js" ],
+		"css": ["overlay.css", "graffiti_display.css"]
+	}],
+
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+
 
 	  "icons": { "16": "spraycan-16.png", "128": "spraycan-128.png" },
 	  "web_accessible_resources": [ "*.png"]

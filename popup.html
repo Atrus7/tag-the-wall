@@ -38,17 +38,18 @@
 		<div class="content">
       	</div>
 
+      	<!-- below are a mock-up layout for the list of graffiti for this webpage -->
 		<div id="graffiti-list">
-			<strong style = "font-size:18px">This is a list of public graffitis</strong>
-			<li>
+			<strong style = "font-size:18px">List of Graffitis</strong>
+			<li id="1stItem">
 				<div class="view">
-					<label class="text" class="item-text">How are you</label>
+					<label class="text" class="item-text">Graffiti Title 1</label>
 					<input class="toggle" type="checkbox" checked="checked" />
 				</div>
 			</li>
-			<li>
+			<li id="2ndItem">
 				<div class="view">
-					<label class="text">How are you 2</label>
+					<label class="text">Graffiti Title 2</label>
 					<input class="toggle" type="checkbox" checked="checked" />
 				</div>
 			</li>
@@ -60,10 +61,10 @@
 						    <a href="javascript:void(0)" id="all" class="selected">All</a>
 						  </li>
 						  <li>
-						    <a href="javascript:void(0)" id="private">Private</a>
+						    <a href="javascript:void(0)" id="mine">Mine</a>
 						  </li>
 						  <li>
-						    <a href="javascript:void(0)" id="public">Public</a>
+						    <a href="javascript:void(0)" id="others">Others</a>
 						  </li>
 						</ul>
 					</td>
@@ -86,9 +87,9 @@
 
 		<!-- graffit list section template -->
 		<script type="text/template" id="manage-template">
-	      <div id="user-info">
-	        Signed in as <%= Parse.User.current().escape("username") %> (<a href="#" class="log-out">Log out</a>)
-	      </div>
+			<div id="user-info">
+				Signed in as <%= Parse.User.current().escape("username") %> (<a href="#" class="log-out">Log out</a>)
+			</div>
 
 	      	<div id="graffiti-list">
 	          	<strong style = "font-size:18px">This is a list of public graffitis</strong>

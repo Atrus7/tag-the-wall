@@ -7,7 +7,7 @@ $(document).ready(function(){
                        "le7e4vYRItSEvMdknX7tFxLs6AQr1FlIUldXN121");
 
     function dothatuploadthing() {
-    	chrome.tabs.executeScript({
+        chrome.tabs.executeScript({
             code: 'sprivate = ' + $("#private").is(":checked") + ';'
         });
         chrome.tabs.executeScript({
@@ -34,13 +34,13 @@ $(document).ready(function(){
     } 
 
     function setWeight(){
-    	chrome.tabs.executeScript({
-    		code: 'stroke = ' + $("#w").val() + ';'
-    	});
+        chrome.tabs.executeScript({
+            code: 'stroke = ' + $("#w").val() + ';'
+        });
     }
 
     function superCoderMasterFunction() {
-    	
+        
         console.log("Starting super function");
         var passed_id = String($("#private_id").val());
         var url;
@@ -109,6 +109,39 @@ $(document).ready(function(){
     document.getElementById('setweight').addEventListener('click', setWeight);
 
 
+    /* ============== Unfinished codes below ============== */
+    // codes below attempt to build a list of public and private graffities loading from Parse
+    // the model and how it would interact with the views are largely completed, popup.html gave
+    // a mockup of how the views would look in a static Html format.
+    // But the difficulty is with the restriction set forth by chrome extension's Content Security Policy.
+    // The policy disable javascript's eval() functions and the like. However, in the case of templating, as
+    // is used below, popup.html contains scripts need to be evaluated for rendering. So no eval() no 
+    // rendering possible. 
+    // One way to get around this may be to do sandboxing, details are not figured out yet, 
+    // please see https://developer.chrome.com/extensions/sandboxingEval for details
+    // or use angular.js instead of backbone.js to build the following model, 
+    // or watch this video for enlightment https://www.youtube.com/watch?v=GBxv8SaX0gg
+
+
+    function loadGraffitiAll(){
+        var query = new Parse.Query(Graffiti);
+        query.contains("urlString", "google");
+        query.find({
+          success: function(results) {
+            // results is an array of Parse.Object.
+            console.log("download is successfull");
+          },
+
+          error: function(error) {
+            // error is an instance of Parse.Error.
+            alert("Error: " + error.code + " " + error.message);
+          }
+        });
+    }
+    document.getElementById('graffiti-list').addEventListener('click', loadGraffitiAll);
+
+
+
 
     /* Model and view for each item in the graffiti-list */
     // graffiti Model
@@ -125,7 +158,7 @@ $(document).ready(function(){
         },
 
         isOwner: function(){
-            return user == Parse.User.current() ? : true , false;
+            return ((this.user === Parse.User.current()) ? true : false);
         }
 
     });
@@ -147,15 +180,15 @@ $(document).ready(function(){
 
         initialize: function(){
             /* do something if necesary */
-        }
+        },
 
         // Filter down the list of all graffiti items that belongs to the user
-        privateItems: function() {
+        mine: function() {
           return this.filter(function(graffiti){ return graffiti.isOwner(); });
         },
 
         // Filter down the list to all graffiti items that NOT belongs to the user.
-        publicItems: function() {
+        others: function() {
           return this.without.apply(this, this.privateItems());
         },
 
@@ -242,7 +275,8 @@ $(document).ready(function(){
           // Setup the query for the collection to look for graffitis from the current user
           this.graffitis.query = new Parse.Query(Graffiti);
           //this.graffitis.query.equalTo("user", Parse.User.current());
-          this.graffitis.query.equalTo("urlString", location.hostname);
+          //this.graffitis.query.equalTo("urlString", location.hostname);
+          this.graffitis.query.contains("urlString", "google");
             
           this.graffitis.on('add',     this.addOne);
           this.graffitis.on('reset',   this.addAll);
@@ -291,10 +325,10 @@ $(document).ready(function(){
           this.$("ul#filters a#" + filterValue).addClass("selected");
           if (filterValue === "all") {
             this.addAll();
-          } else if (filterValue === "completed") {
-            this.addSome(function(item) { return item.get('done') });
+          } else if (filterValue === "private") {
+            this.addSome(function(item) { return item.isOwner() });
           } else {
-            this.addSome(function(item) { return !item.get('done') });
+            this.addSome(function(item) { return !item.isOwner() });
           }
         },
 
@@ -305,23 +339,23 @@ $(document).ready(function(){
           this.addAll();
         },
 
-        // Add a single todo item to the list by creating a view for it, and
+        // Add a single graffiti item to the list by creating a view for it, and
         // appending its element to the `<ul>`.
-        addOne: function(todo) {
-          var view = new TodoView({model: todo});
-          this.$("#todo-list").append(view.render().el);
+        addOne: function(graffiti) {
+          var view = new TodoView({model: graffiti});
+          this.$("#graffiti-list").append(view.render().el);
         },
 
         // Add all items in the graffitis collection at once.
         addAll: function(collection, filter) {
-          this.$("#todo-list").html("");
+          this.$("#graffiti-list").html("");
           this.graffitis.each(this.addOne);
         },
 
         // Only adds some graffitis, based on a filtering function that is passed in
         addSome: function(filter) {
           var self = this;
-          this.$("#todo-list").html("");
+          this.$("#graffiti-list").html("");
           this.graffitis.chain().filter(filter).each(function(item) { self.addOne(item) });
         },
 
@@ -344,8 +378,8 @@ $(document).ready(function(){
     var AppRouter = Parse.Router.extend({
         routes: {
           "all": "all",
-          "private": "private",
-          "public": "public"
+          "mine": "private",
+          "others": "public"
         },
 
         initialize: function(options) {
@@ -355,11 +389,11 @@ $(document).ready(function(){
           state.set({ filter: "all" });
         },
 
-        private: function() {
+        mine: function() {
           state.set({ filter: "private" });
         },
 
-        public: function() {
+        others: function() {
           state.set({ filter: "public" });
         }
     });
