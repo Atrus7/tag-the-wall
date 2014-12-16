@@ -75,7 +75,7 @@ function fileUpload(data) {
 			graffiti.set("left", 0);
 			graffiti.set("top", 0);
 			graffiti.set("isPrivate", sprivate);
-			//console.log('saving pngFile');
+			console.log('saving pngFile');
 			graffiti.save().then(function(obj) {
 				// the object was saved successfully.
 				prompt('Your graffiti "' + name + '" is successfully published. \n Copy to clipboard and share with your friend: ', obj.id);

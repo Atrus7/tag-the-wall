@@ -1,0 +1,161 @@
+h1{
+	font-size: 36px; -webkit-text-stroke: 1px black;
+    color: white;
+    text-shadow:
+	3px 3px 0 #000,
+	-1px -1px 0 #000,  
+	1px -1px 0 #000,
+	-1px 1px 0 #000,
+	1px 1px 0 #000;
+	font-family: 'Comic Sans MS';
+}
+button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9) );
+	background:-moz-linear-gradient( center top, #f9f9f9 5%, #e9e9e9 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9');
+	background-color:#f9f9f9;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#666666;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	font-style:normal;
+	height:36px;
+	line-height:20px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+}
+button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e9e9e9), color-stop(1, #f9f9f9) );
+	background:-moz-linear-gradient( center top, #e9e9e9 5%, #f9f9f9 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e9e9e9', endColorstr='#f9f9f9');
+	background-color:#e9e9e9;
+}button:active {
+	position:relative;
+	top:1px;
+}
+input{
+	height:30px;
+	font-size: 16px;
+}
+#graff-bg{
+	background-image: url("graffiti-wall.jpg");
+	background-position-x: 1300px;
+	background-position-y: -10px;
+}
+::-webkit-input-placeholder {
+ font-size: 12px;
+ color: #d3d3d3 ;
+ text-align: center;
+ font-family: Arial, Helvetica, sans-serif;
+ font-weight: lighter;
+
+}
+/*.first-row{
+	margin-left: 65px;
+}*/
+
+/* styles for graffiti list */
+#graffiti-list{
+    background: #fff;
+    background: rgba(255, 255, 255, 0.9);
+    margin: 20px 0px 10px 0px;
+    padding: 5px;
+    padding-left: 18px;
+    border: 3px solid #ccc;
+    position: relative;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
+    0 25px 50px 0 rgba(0, 0, 0, 0.15);
+    font-size: 18px;
+}
+
+#graffiti-list li .text{
+	text-align: left;
+    vertical-align: middle;
+    position: relative;
+}
+
+#graffiti-list li {
+    text-align: left;
+    position: relative;
+    font-size: 18px;
+    border-bottom: 1px dotted #ccc;
+}
+
+#graffiti-list li:last-child {
+    border-bottom: none;
+}
+
+
+#graffiti-list li .toggle{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    bottom: 5px;
+    width: 20px;
+    height: 20px;
+    margin: auto 0;
+    font-size: 22px;
+    color: #a88a8a;
+} 
+
+#footer {
+    
+    position: relative;
+    text-align: center;
+    width:100%;
+    font-size: 14px;
+}
+
+
+#select-count {
+    text-align: left;
+
+}
+
+#filters {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+}
+
+#filters li {
+    display: inline;
+}
+
+#filters li a {
+    color: black;
+    margin: 2px;
+    text-decoration: none;
+}
+
+#filters li a.selected {
+    font-weight: bold;
+}
+
+#submit-changes {
+	display:  none;
+    line-height: 20px;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 11px;
+    padding: 0 10px;
+    position: relative;
+    border-radius: 3px;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+#clear-completed:hover {
+    background: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+}
