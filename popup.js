@@ -122,9 +122,20 @@ $(document).ready(function(){
           /*if (!this.get("content")) {
             this.set({"content": this.defaults.content});
           }*/
+        },
+
+        isOwner: function(){
+            return user == Parse.User.current() ? : true , false;
         }
 
     });
+
+    // This is the transient application state, not persisted on Parse
+      var AppState = Parse.Object.extend("AppState", {
+        defaults: {
+          filter: "all"
+        }
+      });
 
 
     // Graffiti Collection
@@ -138,7 +149,18 @@ $(document).ready(function(){
             /* do something if necesary */
         }
 
-        // Todos are sorted by their updated time.
+        // Filter down the list of all graffiti items that belongs to the user
+        privateItems: function() {
+          return this.filter(function(graffiti){ return graffiti.isOwner(); });
+        },
+
+        // Filter down the list to all graffiti items that NOT belongs to the user.
+        publicItems: function() {
+          return this.without.apply(this, this.privateItems());
+        },
+
+
+        // graffitis are sorted by their updated time.
         comparator: function(graffiti) {
           return graffiti.get('updatedAt');
         }
@@ -192,69 +214,67 @@ $(document).ready(function(){
 
         // Delegated events for creating new items, and clearing completed ones.
         events: {
-          "keypress #new-todo":  "createOnEnter",
-          "click #clear-completed": "clearCompleted",
-          "click #toggle-all": "toggleAllComplete",
-          "click .log-out": "logOut",
+          "click #submit-changes":  "submit",
+          //"click #toggle-all": "toggleAllComplete",
+          //"click .log-out": "logOut",
           "click ul#filters a": "selectFilter"
         },
 
         el: ".content",
 
-        // At initialization we bind to the relevant events on the `Todos`
+        // At initialization we bind to the relevant events on the `graffitis`
         // collection, when items are added or changed. Kick things off by
-        // loading any preexisting todos that might be saved to Parse.
+        // loading any preexisting graffitis that might be saved to Parse.
         initialize: function() {
           var self = this;
 
-          _.bindAll(this, 'addOne', 'addAll', 'addSome', 'render', 'toggleAllComplete', 'logOut', 'createOnEnter');
-
-          // Main todo management template
-          this.$el.html(_.template($("#manage-template").html()));
-          
-          this.input = this.$("#new-todo");
-          this.allCheckbox = this.$("#toggle-all")[0];
-
-          // Create our collection of Todos
-          this.todos = new TodoList;
-
-          // Setup the query for the collection to look for todos from the current user
-          this.todos.query = new Parse.Query(Todo);
-          this.todos.query.equalTo("user", Parse.User.current());
-            
-          this.todos.bind('add',     this.addOne);
-          this.todos.bind('reset',   this.addAll);
-          this.todos.bind('all',     this.render);
-
-          // Fetch all the todo items for this user
-          this.todos.fetch();
+          //_.bindAll(this, 'addOne', 'addAll', 'addSome', 'render', 'toggleAllComplete', 'logOut', 'submit');
+          _.bindAll(this, 'addOne', 'addAll', 'addSome', 'render', 'submit');
 
           state.on("change", this.filter, this);
+
+          // Main graffiti management template
+          this.$el.html(_.template($("#manage-template").html()));
+
+          // Create our collection of graffitis
+          this.graffitis = new GraffitiList;
+
+          // Setup the query for the collection to look for graffitis from the current user
+          this.graffitis.query = new Parse.Query(Graffiti);
+          //this.graffitis.query.equalTo("user", Parse.User.current());
+          this.graffitis.query.equalTo("urlString", location.hostname);
+            
+          this.graffitis.on('add',     this.addOne);
+          this.graffitis.on('reset',   this.addAll);
+          this.graffitis.on('all',     this.render);
+
+          // Fetch all the graffiti items for this user for this website
+          this.graffitis.fetch();
+
         },
 
         // Logs out the user and shows the login view
-        logOut: function(e) {
+       /* logOut: function(e) {
           Parse.User.logOut();
           new LogInView();
           this.undelegateEvents();
           delete this;
-        },
+        },*/
 
         // Re-rendering the App just means refreshing the statistics -- the rest
         // of the app doesn't change.
         render: function() {
-          var done = this.todos.done().length;
-          var remaining = this.todos.remaining().length;
+          var numPrivate = this.graffitis.privateItems().length;
+          var numPublic = this.graffitis.publicItems().length;
 
-          this.$('#todo-stats').html(this.statsTemplate({
-            total:      this.todos.length,
-            done:       done,
-            remaining:  remaining
+          this.$('#graffiti-footer').html(this.statsTemplate({
+            numTotal  :      numPrivate + numPublic,
+            numPrivate  :       numPrivate,
+            numPublic   :    numPublic
           }));
 
           this.delegateEvents();
 
-          this.allCheckbox.checked = !remaining;
         },
 
         // Filters the list based on which type of filter is selected
@@ -278,7 +298,7 @@ $(document).ready(function(){
           }
         },
 
-        // Resets the filters to display all todos
+        // Resets the filters to display all graffitis
         resetFilters: function() {
           this.$("ul#filters a").removeClass("selected");
           this.$("ul#filters a#all").addClass("selected");
@@ -292,47 +312,63 @@ $(document).ready(function(){
           this.$("#todo-list").append(view.render().el);
         },
 
-        // Add all items in the Todos collection at once.
+        // Add all items in the graffitis collection at once.
         addAll: function(collection, filter) {
           this.$("#todo-list").html("");
-          this.todos.each(this.addOne);
+          this.graffitis.each(this.addOne);
         },
 
-        // Only adds some todos, based on a filtering function that is passed in
+        // Only adds some graffitis, based on a filtering function that is passed in
         addSome: function(filter) {
           var self = this;
           this.$("#todo-list").html("");
-          this.todos.chain().filter(filter).each(function(item) { self.addOne(item) });
+          this.graffitis.chain().filter(filter).each(function(item) { self.addOne(item) });
         },
 
         // If you hit return in the main input field, create new Todo model
-        createOnEnter: function(e) {
-          var self = this;
-          if (e.keyCode != 13) return;
+        submit: function() {
 
-          this.todos.create({
-            content: this.input.val(),
-            order:   this.todos.nextOrder(),
-            done:    false,
+          this.graffitis.create({
+            title:   xxx,
+            urlString:      xxx,
+            png:        null,
             user:    Parse.User.current(),
             ACL:     new Parse.ACL(Parse.User.current())
           });
 
           this.input.val('');
           this.resetFilters();
-        },
-
-        // Clear all done todo items, destroying their models.
-        clearCompleted: function() {
-          _.each(this.todos.done(), function(todo){ todo.destroy(); });
-          return false;
-        },
-
-        toggleAllComplete: function () {
-          var done = this.allCheckbox.checked;
-          this.todos.each(function (todo) { todo.save({'done': done}); });
         }
     });
+
+    var AppRouter = Parse.Router.extend({
+        routes: {
+          "all": "all",
+          "private": "private",
+          "public": "public"
+        },
+
+        initialize: function(options) {
+        },
+
+        all: function() {
+          state.set({ filter: "all" });
+        },
+
+        private: function() {
+          state.set({ filter: "private" });
+        },
+
+        public: function() {
+          state.set({ filter: "public" });
+        }
+    });
+
+    var state = new AppState;
+
+    new AppRouter;
+    new AppView;
+    Parse.history.start();
 
 
 })
